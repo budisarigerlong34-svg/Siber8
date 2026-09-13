@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary-container": "#06b6d4", "on-tertiary-fixed-variant": "#653e00", "on-surface": "#dfe2ee", "on-tertiary-fixed": "#2a1700", "secondary-fixed-dim": "#4fdbc8", "on-secondary": "#003731", "on-primary-fixed": "#001f26", "secondary": "#4fdbc8", "on-background": "#dfe2ee", "error": "#ffb4ab", "background": "#0f131c", "outline": "#869397", "primary-fixed": "#acedff", "inverse-on-surface": "#2c3039", "surface": "#0f131c", "surface-container-highest": "#31353e", "on-secondary-fixed": "#00201c", "on-tertiary": "#472a00", "tertiary-fixed-dim": "#ffb95f", "surface-container-lowest": "#0a0e16", "surface-bright": "#353942", "on-surface-variant": "#bcc9cd", "on-secondary-fixed-variant": "#005048", "surface-dim": "#0f131c", "tertiary-container": "#e79400", "on-primary-container": "#00424f", "surface-container-high": "#262a33", "outline-variant": "#3d494c", "on-error-container": "#ffdad6", "tertiary-fixed": "#ffddb8", "error-container": "#93000a", "surface-tint": "#4cd7f6", "primary": "#4cd7f6", "on-primary": "#003640", "tertiary": "#ffb95f", "inverse-surface": "#dfe2ee", "primary-fixed-dim": "#4cd7f6", "surface-container-low": "#181c24", "on-tertiary-container": "#563400", "secondary-fixed": "#71f8e4", "surface-variant": "#31353e", "on-primary-fixed-variant": "#004e5c", "inverse-primary": "#00687a", "secondary-container": "#04b4a2", "on-error": "#690005", "on-secondary-container": "#003f38", "surface-container": "#1c2028" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "margin": "1.5rem", "space-md": "0.75rem", "gutter": "1rem", "space-xl": "1.5rem", "gutter-tablet": "0.75rem", "space-lg": "1rem", "gutter-mobile": "0.5rem", "space-sm": "0.5rem", "margin-mobile": "0.75rem", "space-xs": "0.25rem" }, fontFamily: { "headline-lg": ["Inter"], "headline-md": ["Inter"], "body-sm": ["Inter"], "telemetry-metric-mobile": ["JetBrains Mono"], "label-sm": ["JetBrains Mono"], "body-lg": ["Inter"], "headline-xl": ["Inter"], "telemetry-metric": ["JetBrains Mono"], "label-lg": ["JetBrains Mono"], "headline-lg-mobile": ["Inter"], "body-md": ["Inter"], "label-md": ["JetBrains Mono"], "headline-xl-mobile": ["Inter"] }, fontSize: { "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-md": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "telemetry-metric-mobile": ["22px", { "lineHeight": "26px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "500" }], "body-lg": ["15px", { "lineHeight": "22px", "fontWeight": "400" }], "headline-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "telemetry-metric": ["28px", { "lineHeight": "32px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "label-lg": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-lg-mobile": ["20px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-md": ["13px", { "lineHeight": "18px", "fontWeight": "400" }], "label-md": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }], "headline-xl-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }] } } } };</script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }
+    @keyframes dashStream {
+      to {
+        stroke-dashoffset: -32;
+      }
+    }
+    .animate-dash {
+      animation: dashStream 2s linear infinite;
+    }
+    .animate-dash-reverse {
+      animation: dashStream 2.6s linear infinite reverse;
+    }
+    @keyframes radarPulse {
+      0% {
+        transform: scale(0.92);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.18);
+        opacity: 0.25;
+      }
+      100% {
+        transform: scale(0.92);
+        opacity: 0.8;
+      }
+    }
+    .pulse-radar {
+      transform-origin: center;
+      animation: radarPulse 3s ease-in-out infinite;
+    }
+    @keyframes shimmerBar {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+    .shimmer-active {
+      background-size: 200% 100%;
+      animation: shimmerBar 2.5s infinite linear;
+    }
+  </style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head><body class="bg-surface text-on-surface flex flex-col min-h-screen selection:bg-primary selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-20 px-space-lg flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="Forensic SNA Intel Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VCu2hffKAtt9TGYw2WAhi7JjMZXBXoRBM3eun6f-g-ZzSkq5dQ4gdXZ02bTRjUjA7IpMDRbOj60EWltAB6EQyIN3bE6qrlEVW6jl0Rnfa02RBHkFXwzSXQ35ZzfV2osxYdFvdUX9s3Spq84h1yWeMQui9infJWT4nzpbkjH__9DTzgO69rgoMDarT3U0xqeuCUrKfP2_xXGtrfCWBN9X5sZhKnAYKFFC5gxZUo8tN3rsDRx90WBJNimw"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-label-sm text-label-sm tracking-widest text-primary truncate uppercase">SENTINEL SNA // INTEL</span></div><div class="flex items-center gap-space-xs"><span class="font-headline-md text-headline-md text-on-surface truncate">Sna Graph</span><span class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded bg-surface-container-high"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-secondary tracking-tight uppercase hidden sm:inline">LIVE SWARM</span></span></div></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Alerts" class="relative w-11 h-11 flex items-center justify-center rounded-lg bg-surface-container-low text-on-surface-variant hover:text-primary active:scale-95 transition-all"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 rounded-full bg-error text-on-error font-label-sm text-[9px] font-bold flex items-center justify-center animate-pulse">3</span></button><div class="w-11 h-11 flex items-center justify-center"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-primary/40 hover:ring-primary transition-all cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfxnHeaKss7fvrKcBRC8yfwpZWNjudwCgF9oV7OYDqPkSOYy3tcKGeaM_PtlE8xLooeJUJVWdQZbAFVIYRyLpygRydpR2mLLaN4nc16554dvXz1178aex4fAP06exp08pMkWnciYWMKrRlMZ18vXyeLC65OzOxyCDdc6aJXwmS6giKX8w16gRkTIJPoxmJDFJiFUX4MX7z6kYLPx3a_iI3b4b18uHrYxbOPhRsFhfIMbBqW2MXmGox"/></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-20 bg-surface min-h-[calc(100vh-5rem)]"><div class="flex flex-col w-full pb-20">
+<!-- Investigation Status Ribbon -->
+<div class="px-space-md pt-space-md">
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-xl relative overflow-hidden">
+<!-- Glow ambient backdrop -->
+<div class="absolute -right-12 -top-12 w-36 h-36 bg-error/15 rounded-full blur-2xl pointer-events-none animate-pulse"></div>
+<div class="absolute -left-12 -bottom-12 w-32 h-32 bg-primary/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between gap-space-sm relative z-10 mb-space-xs">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="font-label-sm text-label-sm text-error uppercase tracking-wider flex items-center gap-1.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-error opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-error"></span>
+</span>
+            RED-ALERT // ACTIVE SWARM
+          </span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded uppercase">
+          KMDK-CRMB-2024 / IBAM-DMS
+        </span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface relative z-10 leading-tight">
+        Operasi Pemantauan Dead Man's Switch: Propagasi Arsip .tar.zst.age
+      </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs relative z-10">
+        Deteksi eksfiltrasi data terenkripsi via BitTorrent magnet link di jejaring media sosial (X/Twitter, Telegram, tech forums) bersamaan dengan akselerasi pemanggilan saksi kasus pengadaan Chromebook Kemendikbudristek TA 2019-2023.
+      </p>
+<!-- Threat Level Banner -->
+<div class="mt-space-md pt-space-xs flex items-center justify-between gap-space-xs bg-surface-container-lowest/60 p-space-xs rounded-lg border border-outline-variant/30">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-error text-[18px]">gavel</span>
+<span class="font-label-sm text-label-sm text-on-surface uppercase">Subjek Utama: Ibrahim Arief (Ibam)</span>
+</div>
+<span class="font-label-sm text-label-sm text-error bg-error/10 px-2 py-0.5 rounded font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+          RISIKO: KRITIS
+        </span>
+</div>
+</div>
+</div>
+<!-- Dead Man's Switch Critical Telemetry & Countdown -->
+<div class="px-space-md pt-space-md">
+<div class="bg-surface-container-high rounded-xl p-space-md shadow-lg relative overflow-hidden border border-outline-variant/20">
+<div class="flex items-center justify-between pb-space-xs mb-space-xs bg-surface-container/60 -mx-space-md -mt-space-md px-space-md pt-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[20px] animate-spin" style="animation-duration: 8s;">timer</span>
+<span class="font-label-sm text-label-sm text-tertiary uppercase tracking-wider font-bold">Sakelar Bunuh Diri Digital (Dead Man's Switch)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+  Heartbeat: FAILED (2/3)
+</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-space-xs my-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Hitung Mundur Rilis Kunci Privat age</span>
+<div class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-tertiary tracking-tight font-bold drop-shadow-[0_0_8px_rgba(255,185,95,0.4)]" id="dms-timer">
+            47:58:32
+          </div>
+</div>
+<div class="flex flex-col items-start sm:items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Pemicu Otomatis</span>
+<span class="font-label-md text-label-md text-error bg-error/15 px-2 py-0.5 rounded uppercase font-bold border border-error/30 animate-pulse">
+            Broadcast Kunci age via Tor V3 &amp; Usenet
+          </span>
+</div>
+</div>
+<div class="w-full bg-surface-container-lowest rounded-full h-1.5 mt-space-xs overflow-hidden">
+<div class="bg-gradient-to-r from-tertiary to-error h-1.5 rounded-full shimmer-active" style="width: 74%; background-image: linear-gradient(90deg, #ffb95f, #ffb4ab 50%, #ffb95f);"></div>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Heartbeat interval: 72 Jam</span>
+<span class="font-label-sm text-label-sm text-tertiary font-mono" id="dms-remaining">Batas Toleransi: 24:01:28 tersisa</span>
+</div>
+</div>
+</div>
+<!-- Primary SNA Network Graph Card -->
+<div class="px-space-md pt-space-md">
+<div class="bg-surface-container rounded-xl p-space-md shadow-xl flex flex-col">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px] animate-pulse">hub</span>
+<span class="font-headline-md text-headline-md text-on-surface">Peta Graf SNA Eksfiltrasi</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary bg-primary-container/20 px-2 py-0.5 rounded uppercase border border-primary/30">
+          Force-Directed 2.4
+        </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+        Topologi sentralitas simpul: relasi Ibam dengan seeder BitTorrent, agregator X/Twitter, dan sub-kontraktor Chromebook.
+      </p>
+<!-- Network Filter Chips -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-space-xs mb-space-xs scrollbar-none" id="graph-filters">
+<button class="filter-chip bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full uppercase font-bold flex-shrink-0 transition-all duration-200 shadow-sm ring-1 ring-primary" data-filter="all">
+          Semua (342)
+        </button>
+<button class="filter-chip bg-surface-container-highest text-on-surface-variant hover:text-primary hover:bg-surface-container-high font-label-sm text-label-sm px-3 py-1 rounded-full uppercase flex-shrink-0 transition-all duration-200" data-filter="seeders">
+          Seeder (48)
+        </button>
+<button class="filter-chip bg-surface-container-highest text-on-surface-variant hover:text-primary hover:bg-surface-container-high font-label-sm text-label-sm px-3 py-1 rounded-full uppercase flex-shrink-0 transition-all duration-200" data-filter="amplifiers">
+          Amplifier X (185)
+        </button>
+<button class="filter-chip bg-surface-container-highest text-on-surface-variant hover:text-primary hover:bg-surface-container-high font-label-sm text-label-sm px-3 py-1 rounded-full uppercase flex-shrink-0 transition-all duration-200" data-filter="procurement">
+          Vendor/Birokrat (12)
+        </button>
+</div>
+<!-- Vector Interactive Graph Canvas Viewport -->
+<div class="relative w-full h-72 bg-surface-container-lowest rounded-lg overflow-hidden flex items-center justify-center p-space-xs border border-outline-variant/30 group">
+<!-- SVG Interactive Graph visualization -->
+<svg class="w-full h-full" fill="none" viewbox="0 0 360 270" xmlns="http://www.w3.org/2000/svg">
+<!-- Background Grid Matrix -->
+<defs>
+<pattern height="24" id="sna-grid" patternunits="userSpaceOnUse" width="24">
+<path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="0.8"></path>
+</pattern>
+<radialgradient cx="50%" cy="50%" id="ibam-glow" r="50%">
+<stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.6"></stop>
+<stop offset="100%" stop-color="#4cd7f6" stop-opacity="0"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="50%" id="seeder-glow" r="50%">
+<stop offset="0%" stop-color="#4fdbc8" stop-opacity="0.5"></stop>
+<stop offset="100%" stop-color="#4fdbc8" stop-opacity="0"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="50%" id="danger-glow" r="50%">
+<stop offset="0%" stop-color="#ffb4ab" stop-opacity="0.5"></stop>
+<stop offset="100%" stop-color="#ffb4ab" stop-opacity="0"></stop>
+</radialgradient>
+</defs>
+<rect fill="url(#sna-grid)" height="100%" width="100%"></rect>
+<!-- Graph Edges (Animated Pulse & Dashoffset Links) -->
+<!-- Ibam to Seeders -->
+<line class="cluster-link link-seeders animate-dash" stroke="#4fdbc8" stroke-dasharray="4 4" stroke-opacity="0.75" stroke-width="1.8" x1="180" x2="80" y1="135" y2="70"></line>
+<line class="cluster-link link-seeders animate-dash-reverse" stroke="#4fdbc8" stroke-dasharray="3 3" stroke-opacity="0.5" stroke-width="1.2" x1="180" x2="65" y1="135" y2="120"></line>
+<line class="cluster-link link-seeders" stroke="#4fdbc8" stroke-opacity="0.35" stroke-width="1" x1="180" x2="100" y1="135" y2="195"></line>
+<line class="cluster-link link-seeders animate-dash" stroke="#4fdbc8" stroke-dasharray="2 3" stroke-opacity="0.3" stroke-width="1" x1="80" x2="65" y1="70" y2="120"></line>
+<!-- Ibam to Media/Amplifiers (Top Right) -->
+<line class="cluster-link link-amplifiers animate-dash" stroke="#4cd7f6" stroke-dasharray="5 3" stroke-opacity="0.7" stroke-width="2" x1="180" x2="280" y1="135" y2="65"></line>
+<line class="cluster-link link-amplifiers animate-dash-reverse" stroke="#4cd7f6" stroke-dasharray="3 4" stroke-opacity="0.5" stroke-width="1.2" x1="180" x2="310" y1="135" y2="115"></line>
+<line class="cluster-link link-amplifiers" stroke="#4cd7f6" stroke-opacity="0.3" stroke-width="0.8" x1="280" x2="310" y1="65" y2="115"></line>
+<line class="cluster-link link-amplifiers" stroke="#4cd7f6" stroke-opacity="0.35" stroke-width="0.8" x1="280" x2="245" y1="65" y2="35"></line>
+<!-- Ibam to Kemendikbudristek Procurement Entities (Bottom Right) -->
+<line class="cluster-link link-procurement animate-dash" stroke="#ffb95f" stroke-dasharray="6 3" stroke-opacity="0.7" stroke-width="2" x1="180" x2="275" y1="135" y2="210"></line>
+<line class="cluster-link link-procurement animate-dash-reverse" stroke="#ffb95f" stroke-dasharray="3 3" stroke-opacity="0.45" stroke-width="1.2" x1="180" x2="225" y1="135" y2="235"></line>
+<line class="cluster-link link-procurement" stroke="#ffb95f" stroke-opacity="0.3" stroke-width="1" x1="275" x2="330" y1="210" y2="225"></line>
+<!-- Ibam to Whistleblower / Key Recipients (Bottom Left) -->
+<line class="cluster-link link-whistleblower animate-dash" stroke="#ffb4ab" stroke-dasharray="4 3" stroke-opacity="0.6" stroke-width="1.5" x1="180" x2="125" y1="135" y2="225"></line>
+<line class="cluster-link link-whistleblower" stroke="#ffb4ab" stroke-opacity="0.3" stroke-width="1" x1="125" x2="50" y1="225" y2="215"></line>
+<!-- Dynamic Pulsing Radar Rings on Central Hub & Clusters -->
+<circle class="pulse-radar" cx="180" cy="135" fill="none" r="28" stroke="#4cd7f6" stroke-opacity="0.4" stroke-width="1.5"></circle>
+<circle class="pulse-radar" cx="180" cy="135" fill="none" r="38" stroke="#4cd7f6" stroke-dasharray="3 4" stroke-opacity="0.2" stroke-width="1"></circle>
+<circle class="pulse-radar" cx="80" cy="70" fill="none" r="16" stroke="#4fdbc8" stroke-opacity="0.3" stroke-width="1"></circle>
+<circle class="pulse-radar" cx="280" cy="65" fill="none" r="18" stroke="#06b6d4" stroke-opacity="0.3" stroke-width="1"></circle>
+<circle class="pulse-radar" cx="275" cy="210" fill="none" r="17" stroke="#e79400" stroke-opacity="0.3" stroke-width="1"></circle>
+<!-- Cluster Glows -->
+<circle cx="180" cy="135" fill="url(#ibam-glow)" r="32"></circle>
+<circle cx="80" cy="70" fill="url(#seeder-glow)" r="22"></circle>
+<circle cx="280" cy="65" fill="url(#ibam-glow)" r="24"></circle>
+<circle cx="275" cy="210" fill="url(#danger-glow)" r="24"></circle>
+<!-- Seeders Cluster Nodes -->
+<g class="cluster-group cluster-seeders cursor-pointer transition-transform duration-200 hover:scale-110 origin-[80px_70px]" id="node-seeders">
+<circle cx="80" cy="70" fill="#04b4a2" r="8"></circle>
+<circle cx="65" cy="120" fill="#4fdbc8" r="5"></circle>
+<circle cx="100" cy="195" fill="#4fdbc8" r="4.5"></circle>
+<circle cx="45" cy="60" fill="#04b4a2" r="3"></circle>
+<text fill="#4fdbc8" font-family="JetBrains Mono" font-size="8" font-weight="600" text-anchor="middle" x="78" y="55">TOR SEEDERS</text>
+</g>
+<!-- Amplifiers Cluster Nodes -->
+<g class="cluster-group cluster-amplifiers cursor-pointer transition-transform duration-200 hover:scale-110 origin-[280px_65px]" id="node-amplifiers">
+<circle cx="280" cy="65" fill="#06b6d4" r="9"></circle>
+<circle cx="310" cy="115" fill="#4cd7f6" r="6"></circle>
+<circle cx="245" cy="35" fill="#4cd7f6" r="5"></circle>
+<circle cx="325" cy="55" fill="#acedff" r="4"></circle>
+<text fill="#4cd7f6" font-family="JetBrains Mono" font-size="8" font-weight="600" text-anchor="middle" x="280" y="50">X / OPSEC BOT</text>
+</g>
+<!-- Procurement Cluster Nodes -->
+<g class="cluster-group cluster-procurement cursor-pointer transition-transform duration-200 hover:scale-110 origin-[275px_210px]" id="node-procurement">
+<circle cx="275" cy="210" fill="#e79400" r="8"></circle>
+<circle cx="225" cy="235" fill="#ffb95f" r="6"></circle>
+<circle cx="330" cy="225" fill="#ffb95f" r="5"></circle>
+<text fill="#ffb95f" font-family="JetBrains Mono" font-size="8" font-weight="600" text-anchor="middle" x="275" y="232">VENDOR PENGADAAN</text>
+</g>
+<!-- Whistleblower Channel Nodes -->
+<g class="cluster-group cluster-whistleblower cursor-pointer transition-transform duration-200 hover:scale-110 origin-[125px_225px]" id="node-whistleblower">
+<circle cx="125" cy="225" fill="#ffb4ab" r="7"></circle>
+<circle cx="50" cy="215" fill="#ffb4ab" r="4"></circle>
+<text fill="#ffb4ab" font-family="JetBrains Mono" font-size="8" font-weight="600" text-anchor="middle" x="125" y="244">JURNALIS / ICW</text>
+</g>
+<!-- Central Node: Ibrahim Arief (Ibam) with pulse ring -->
+<g class="cursor-pointer transition-transform duration-300 hover:scale-110 origin-[180px_135px]" id="node-ibam">
+<circle cx="180" cy="135" fill="#0f131c" r="14" stroke="#4cd7f6" stroke-width="2.5"></circle>
+<circle class="animate-pulse" cx="180" cy="135" fill="#4cd7f6" r="8"></circle>
+<text fill="#dfe2ee" font-family="Inter" font-size="9" font-weight="700" text-anchor="middle" x="180" y="162">IBRAHIM ARIEF (IBAM)</text>
+<text fill="#4cd7f6" font-family="JetBrains Mono" font-size="7.5" text-anchor="middle" x="180" y="172">BC: 0.88 // DEG: 0.94</text>
+</g>
+</svg>
+<!-- Floating HUD Centrality Metric Overlay -->
+<div class="absolute top-2 left-2 bg-surface-container-high/90 backdrop-blur-md px-2 py-1 rounded border border-outline-variant/30 shadow-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Sentralitas Antara (Betweenness)</span>
+<span class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-primary font-bold">0.884</span>
+</div>
+<div class="absolute bottom-2 right-2 bg-surface-container-high/90 backdrop-blur-md px-2 py-1 rounded text-right border border-outline-variant/30 shadow-md">
+<span class="font-label-sm text-label-sm text-secondary block">Velositas Swarm</span>
+<span class="font-label-lg text-label-lg text-secondary font-bold" id="swarm-velocity">+128 nodus/jam</span>
+</div>
+</div>
+<!-- Graph Global Centrality Metrics Bento -->
+<div class="grid grid-cols-3 gap-space-xs mt-space-sm">
+<div class="bg-surface-container-low p-space-xs rounded-lg text-center hover:bg-surface-container-high transition-colors">
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Modularitas</span>
+<span class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-on-surface font-bold">0.74</span>
+<span class="font-label-sm text-label-sm text-secondary block">4 Klaster Terisolasi</span>
+</div>
+<div class="bg-surface-container-low p-space-xs rounded-lg text-center hover:bg-surface-container-high transition-colors">
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Densitas Graf</span>
+<span class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-on-surface font-bold">0.41</span>
+<span class="font-label-sm text-label-sm text-tertiary block">Konektivitas Tinggi</span>
+</div>
+<div class="bg-surface-container-low p-space-xs rounded-lg text-center hover:bg-surface-container-high transition-colors">
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase">Skor Sentralitas</span>
+<span class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-primary font-bold">94.2</span>
+<span class="font-label-sm text-label-sm text-error block">Hub Utama (Ibam)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- BitTorrent Swarm & Encrypted Payload Telemetry -->
+<div class="px-space-md pt-space-md">
+<div class="bg-surface-container rounded-xl p-space-md shadow-xl">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px] animate-spin" style="animation-duration: 6s;">stream</span>
+<span class="font-headline-md text-headline-md text-on-surface">Telemetri Swarm BitTorrent</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-container/20 px-2 py-0.5 rounded uppercase border border-secondary/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          DHT / PEX Aktif
+        </span>
+</div>
+<!-- File Spec Card -->
+<div class="bg-surface-container-low p-space-sm rounded-lg mb-space-sm border border-outline-variant/20">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="material-symbols-outlined text-primary text-[18px]">lock</span>
+<span class="font-label-md text-label-md text-primary font-bold truncate">
+            kemendikbud_chromebook_audit_2019-2023.tar.zst.age
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-x-space-sm gap-y-1 mt-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Ukuran Payload:</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">14.28 GB (Zstd Lvl 19)</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Format Kriptografi:</span>
+<span class="font-label-md text-label-md text-secondary font-bold">age (X25519)</span>
+</div>
+<div class="col-span-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant block">SHA-256 Checksum:</span>
+<span class="font-label-sm text-label-sm text-on-surface font-mono break-all bg-surface-container-lowest p-1 rounded block select-all cursor-pointer hover:text-primary transition-colors" title="Klik untuk menyalin checksum">
+              e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+            </span>
+</div>
+</div>
+</div>
+<!-- Seeders vs Leechers Ratio Progress -->
+<div class="mb-space-sm">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm text-on-surface uppercase">Kepadatan Swarm Saat Ini</span>
+<span class="font-label-sm text-label-sm text-secondary font-mono" id="swarm-counts">312 Seeders / 1,420 Leechers</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full flex overflow-hidden p-0.5">
+<div class="bg-secondary h-full rounded-l-full shimmer-active" id="bar-seeders" style="width: 22%; background-image: linear-gradient(90deg, #4fdbc8, #acedff 50%, #4fdbc8);"></div>
+<div class="bg-primary h-full rounded-r-full shimmer-active" id="bar-leechers" style="width: 78%; background-image: linear-gradient(90deg, #4cd7f6, #06b6d4 50%, #4cd7f6);"></div>
+</div>
+<div class="flex justify-between items-center mt-1">
+<span class="font-label-sm text-label-sm text-secondary" id="seeders-ratio">22% Full Replicas</span>
+<span class="font-label-sm text-label-sm text-primary font-mono" id="replication-speed">Kecepatan Replikasi: 142 MB/s</span>
+</div>
+</div>
+<!-- Geo Concentration Distribution Bars -->
+<div class="bg-surface-container-lowest p-space-sm rounded-lg border border-outline-variant/20">
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase mb-space-xs">
+          Konsentrasi Geografis Node BitTorrent
+        </span>
+<!-- Indonesia -->
+<div class="mb-space-xs">
+<div class="flex justify-between items-center text-xs mb-0.5">
+<span class="font-body-sm text-body-sm text-on-surface flex items-center gap-1">
+<span>🇮🇩</span> Indonesia (Domestik ISP &amp; Telco)
+            </span>
+<span class="font-label-md text-label-md text-primary font-bold">58%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full shimmer-active" style="width: 58%; background-image: linear-gradient(90deg, #4cd7f6, #acedff 50%, #4cd7f6);"></div>
+</div>
+</div>
+<!-- Singapore VPN / Cloud -->
+<div class="mb-space-xs">
+<div class="flex justify-between items-center text-xs mb-0.5">
+<span class="font-body-sm text-body-sm text-on-surface flex items-center gap-1">
+<span>🇸🇬</span> Singapura (Commercial VPN/VPS Relays)
+            </span>
+<span class="font-label-md text-label-md text-secondary font-bold">22%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full shimmer-active" style="width: 22%; background-image: linear-gradient(90deg, #4fdbc8, #71f8e4 50%, #4fdbc8);"></div>
+</div>
+</div>
+<!-- Iceland & Tor Relays -->
+<div>
+<div class="flex justify-between items-center text-xs mb-0.5">
+<span class="font-body-sm text-body-sm text-on-surface flex items-center gap-1">
+<span>🇮🇸</span> Islandia / Tor Onion Seeders
+            </span>
+<span class="font-label-md text-label-md text-tertiary font-bold">20%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-1.5 rounded-full shimmer-active" style="width: 20%; background-image: linear-gradient(90deg, #ffb95f, #ffddb8 50%, #ffb95f);"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Real-time Social Signal Feed & Whistleblower Buzz -->
+<div class="px-space-md pt-space-md">
+<div class="bg-surface-container rounded-xl p-space-md shadow-xl">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px] animate-pulse">radar</span>
+<span class="font-headline-md text-headline-md text-on-surface">Radar Sinyal &amp; Narasi X</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded uppercase flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+          OSINT STREAM
+        </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+        Pemantauan amplifikasi hashtag #IbamArsipChromebook, penyebaran link magnet, dan diskusi forum komunitas IT.
+      </p>
+<!-- Metric Stream Cards -->
+<div class="grid grid-cols-3 gap-space-xs mb-space-md">
+<div class="bg-surface-container-low p-space-xs rounded-lg border border-outline-variant/20 hover:border-primary/40 transition-colors">
+<span class="font-label-sm text-label-sm text-primary block">X/Twitter</span>
+<span class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-on-surface font-bold" id="metric-x">18.4K</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mentions</span>
+</div>
+<div class="bg-surface-container-low p-space-xs rounded-lg border border-outline-variant/20 hover:border-secondary/40 transition-colors">
+<span class="font-label-sm text-label-sm text-secondary block">Telegram</span>
+<span class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-on-surface font-bold" id="metric-tg">4.2K</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mirror Share</span>
+</div>
+<div class="bg-surface-container-low p-space-xs rounded-lg border border-outline-variant/20 hover:border-tertiary/40 transition-colors">
+<span class="font-label-sm text-label-sm text-tertiary block">Reddit</span>
+<span class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-on-surface font-bold" id="metric-reddit">980</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">r/indonesia Up</span>
+</div>
+</div>
+<!-- Top Influential / Node Agents List -->
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block mb-space-xs">
+        Simpul Berpengaruh &amp; Amplifikasi Utama
+      </span>
+<div class="flex flex-col gap-space-xs">
+<!-- Node Item 1: Anonymous Whistleblower -->
+<div class="bg-surface-container-low hover:bg-surface-container-high active:scale-[0.99] p-space-xs rounded-lg flex items-center justify-between gap-space-xs cursor-pointer transition-all border border-transparent hover:border-primary/30">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="relative w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs flex-shrink-0">
+              @A
+              <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">@AnonTech_ID</span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary/15 px-1 py-0.2 rounded">Whistleblower</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block truncate">
+                Penyebar awal torrent hash .tar.zst.age &amp; instruksi dekripsi age
+              </span>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-label-md text-label-md text-primary font-bold">Impact: 9.6</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">128K Reach</span>
+</div>
+</div>
+<!-- Node Item 2: Investigative Journalist -->
+<div class="bg-surface-container-low hover:bg-surface-container-high active:scale-[0.99] p-space-xs rounded-lg flex items-center justify-between gap-space-xs cursor-pointer transition-all border border-transparent hover:border-secondary/30">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="relative w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold text-xs flex-shrink-0">
+              @F
+              <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">@ForensikDigitalID</span>
+<span class="font-label-sm text-label-sm text-primary bg-primary/15 px-1 py-0.2 rounded">Investigasi</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block truncate">
+                Verifikasi integritas arsip zstandard &amp; struktur audit BPK
+              </span>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-label-md text-label-md text-secondary font-bold">Impact: 8.9</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">94K Reach</span>
+</div>
+</div>
+<!-- Node Item 3: Official Counter Narrative -->
+<div class="bg-surface-container-low hover:bg-surface-container-high active:scale-[0.99] p-space-xs rounded-lg flex items-center justify-between gap-space-xs cursor-pointer transition-all border border-transparent hover:border-error/30">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="relative w-8 h-8 rounded-full bg-error/20 flex items-center justify-center text-error font-bold text-xs flex-shrink-0">
+              @B
+              <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-error animate-ping"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">@CyberClarify_</span>
+<span class="font-label-sm text-label-sm text-error bg-error/15 px-1 py-0.2 rounded">Kontra-Narasi</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block truncate">
+                Disinformasi payload malware &amp; intimidasi penyebaran dokumen rahasia negara
+              </span>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-label-md text-label-md text-tertiary font-bold">Impact: 6.4</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">45K Reach</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Tactical Forensic Action Toolbar -->
+<!-- Infografis Monitoring Media Online & Media Sosial (Multi-Source OSINT Aggregator) -->
+<div class="px-space-md pt-space-md">
+<div class="bg-surface-container rounded-xl p-space-md shadow-xl border border-outline-variant/20">
+<!-- Header & Badge -->
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px] animate-pulse">newspaper</span>
+<span class="font-headline-md text-headline-md text-on-surface">Infografis &amp; Sebaran Media Terverifikasi</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary bg-primary-container/20 px-2 py-0.5 rounded uppercase border border-primary/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+        24H AGGREGATION // MULTI-SOURCE INTEL
+      </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+      Agregasi liputan media daring nasional terverifikasi, timeline volume eksfiltrasi arsip Ibam, serta viralisasi multi-platform (X, YouTube, Telegram &amp; Forum IT).
+    </p>
+<!-- Summary Multi-Source Metric Bento Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-xs mb-space-md">
+<!-- Mainstream News -->
+<div class="bg-surface-container-low p-space-sm rounded-lg border border-outline-variant/20 hover:border-primary/30 transition-colors">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">feed</span>
+            Media Mainstream
+          </span>
+<span class="font-label-sm text-label-sm text-error bg-error/15 px-1.5 py-0.2 rounded font-bold">78% Kritis</span>
+</div>
+<div class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-on-surface font-bold">142 <span class="font-label-md text-label-md text-on-surface-variant font-normal">Artikel</span></div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+          Detik, Kompas, Tempo, CNN ID, Tirto
+        </div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full mt-2 overflow-hidden flex">
+<div class="bg-error h-full rounded-l-full" style="width: 78%;" title="Sentimen Negatif/Kritis (78%)"></div>
+<div class="bg-secondary h-full rounded-r-full" style="width: 22%;" title="Investigasi Mendalam (22%)"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-on-surface-variant mt-1 font-mono">
+<span class="text-error">78% Negatif</span>
+<span class="text-secondary">22% Investigasi</span>
+</div>
+</div>
+<!-- X / Twitter -->
+<div class="bg-surface-container-low p-space-sm rounded-lg border border-outline-variant/20 hover:border-secondary/30 transition-colors">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">tag</span>
+            X / Twitter
+          </span>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary/15 px-1.5 py-0.2 rounded font-bold">+340 RT/mnt</span>
+</div>
+<div class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-on-surface font-bold">48.2K <span class="font-label-md text-label-md text-on-surface-variant font-normal">Percakapan</span></div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate">
+          Trending: #BongkarChromebook, #ArsipIbam
+        </div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-secondary h-full rounded-full shimmer-active" style="width: 86%; background-image: linear-gradient(90deg, #4fdbc8, #acedff 50%, #4fdbc8);"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-on-surface-variant mt-1 font-mono">
+<span>Velositas Akut</span>
+<span class="text-secondary">Viralitas Tinggi</span>
+</div>
+</div>
+<!-- Video & Alt Channels -->
+<div class="bg-surface-container-low p-space-sm rounded-lg border border-outline-variant/20 hover:border-tertiary/30 transition-colors">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-tertiary font-bold uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">play_circle</span>
+            Video &amp; P2P Alternatif
+          </span>
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary/15 px-1.5 py-0.2 rounded font-bold">85 Mirror Links</span>
+</div>
+<div class="font-telemetry-metric-mobile text-telemetry-metric-mobile text-on-surface font-bold">3.8M <span class="font-label-md text-label-md text-on-surface-variant font-normal">Total Views</span></div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate">
+          TikTok, YouTube Intel, Telegram, Reddit
+        </div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full mt-2 overflow-hidden">
+<div class="bg-tertiary h-full rounded-full shimmer-active" style="width: 72%; background-image: linear-gradient(90deg, #ffb95f, #ffddb8 50%, #ffb95f);"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-on-surface-variant mt-1 font-mono">
+<span>TikTok 54%</span>
+<span class="text-tertiary">YT Intel 32%</span>
+</div>
+</div>
+</div>
+<!-- Visual Chart Section: Timeline Dynamic Volume vs Legal Milestones -->
+<div class="bg-surface-container-low p-space-sm rounded-lg border border-outline-variant/20 mb-space-md">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-on-surface uppercase font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">show_chart</span>
+          Dinamika Volume Berita vs Fase Kasus Hukum
+        </span>
+<span class="font-label-sm text-label-sm text-primary font-mono">PEAK: 1,480 Mention/Jam</span>
+</div>
+<!-- Interactive SVG Chart Graphic -->
+<div class="relative w-full h-36 bg-surface-container-lowest rounded overflow-hidden p-1 border border-outline-variant/20 flex flex-col justify-between">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 360 110" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="chart-grad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#4cd7f6" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="#4cd7f6" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Horizontal Guide Lines -->
+<line stroke="rgba(255, 255, 255, 0.05)" stroke-dasharray="3 3" stroke-width="1" x1="0" x2="360" y1="25" y2="25"></line>
+<line stroke="rgba(255, 255, 255, 0.05)" stroke-dasharray="3 3" stroke-width="1" x1="0" x2="360" y1="60" y2="60"></line>
+<line stroke="rgba(255, 255, 255, 0.05)" stroke-dasharray="3 3" stroke-width="1" x1="0" x2="360" y1="90" y2="90"></line>
+<!-- Filled Wave Area -->
+<path d="M 0 95 Q 40 90, 70 82 T 140 75 T 190 35 T 250 18 T 310 28 L 360 12 L 360 110 L 0 110 Z" fill="url(#chart-grad)"></path>
+<!-- Accent Stream Curve -->
+<path d="M 0 95 Q 40 90, 70 82 T 140 75 T 190 35 T 250 18 T 310 28 L 360 12" fill="none" stroke="#4cd7f6" stroke-width="2.2"></path>
+<!-- Milestone Nodes -->
+<!-- Phase 1: Saksi Diperiksa -->
+<circle cx="70" cy="82" fill="#1c2028" r="4" stroke="#06b6d4" stroke-width="1.8"></circle>
+<!-- Phase 2: Bocoran Magnet Hash -->
+<circle class="animate-ping" cx="190" cy="35" fill="#ffb95f" opacity="0.75" r="4"></circle>
+<circle cx="190" cy="35" fill="#1c2028" r="4.5" stroke="#ffb95f" stroke-width="2"></circle>
+<!-- Phase 3: Akselerasi Dead Man Switch -->
+<circle class="animate-ping" cx="250" cy="18" fill="#ffb4ab" opacity="0.75" r="5"></circle>
+<circle cx="250" cy="18" fill="#0f131c" r="5" stroke="#ffb4ab" stroke-width="2"></circle>
+<!-- Marker Point Current -->
+<circle cx="360" cy="12" fill="#acedff" r="3.5"></circle>
+</svg>
+<!-- Milestones labels bar -->
+<div class="grid grid-cols-3 text-[9px] font-mono text-on-surface-variant border-t border-outline-variant/20 pt-1 px-1">
+<div>
+<span class="text-primary block">[H-3] Pemanggilan Saksi</span>
+<span>320 artikel/hari</span>
+</div>
+<div class="text-center">
+<span class="text-tertiary block">[H-1] Bocoran Magnet Hash</span>
+<span>940 artikel/hari</span>
+</div>
+<div class="text-right">
+<span class="text-error block">[HARI INI] Dead Man's Switch</span>
+<span class="text-error font-bold">1,480 artikel/hari</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Top Angle Pemberitaan Media Online Breakdown -->
+<div class="bg-surface-container-low p-space-sm rounded-lg border border-outline-variant/20 mb-space-md">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface uppercase font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">pie_chart</span>
+          Top Angle Pemberitaan Media Online
+        </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Total Sampel: 142 Portal Berita</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<!-- Angle 1 -->
+<div>
+<div class="flex justify-between items-center text-xs mb-0.5">
+<span class="font-body-sm text-body-sm text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+              Aliran Dana &amp; Estimasi Kerugian Negara
+            </span>
+<span class="font-label-md text-label-md text-error font-bold">42%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-1.5 rounded-full" style="width: 42%;"></div>
+</div>
+</div>
+<!-- Angle 2 -->
+<div>
+<div class="flex justify-between items-center text-xs mb-0.5">
+<span class="font-body-sm text-body-sm text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+              Kriptografi Arsip .tar.zst.age / Dead Man's Switch
+            </span>
+<span class="font-label-md text-label-md text-primary font-bold">31%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 31%;"></div>
+</div>
+</div>
+<!-- Angle 3 -->
+<div>
+<div class="flex justify-between items-center text-xs mb-0.5">
+<span class="font-body-sm text-body-sm text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+              Keterlibatan Birokrasi Kemendikbudristek TA 2019-2023
+            </span>
+<span class="font-label-md text-label-md text-tertiary font-bold">18%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-1.5 rounded-full" style="width: 18%;"></div>
+</div>
+</div>
+<!-- Angle 4 -->
+<div>
+<div class="flex justify-between items-center text-xs mb-0.5">
+<span class="font-body-sm text-body-sm text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              Bantahan &amp; Pernyataan Kuasa Hukum Subjek
+            </span>
+<span class="font-label-md text-label-md text-secondary font-bold">9%</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 9%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Wire Critical Media Headlines -->
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block mb-space-xs">
+        Feed Cuplikan Berita Kritis Terbaru (Live Wire)
+      </span>
+<div class="flex flex-col gap-space-xs">
+<!-- Headline 1 -->
+<div class="bg-surface-container-low hover:bg-surface-container-high p-space-xs rounded-lg flex items-center justify-between gap-space-xs transition-colors border border-transparent hover:border-primary/30">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="w-8 h-8 rounded bg-primary/10 border border-primary/20 flex items-center justify-center text-primary text-xs font-bold font-mono flex-shrink-0">
+              TMP
+            </div>
+<div class="min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-primary font-bold">TEMPO.CO</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">· 18 mnt lalu</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface block truncate font-medium">
+                "Misteri Arsip 14.28 GB: Muncul Link Magnet 'Kemendikbud Chromebook Audit' Usai Pemeriksaan Saksi"
+              </span>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-label-md text-label-md text-primary font-bold font-mono">Viral: 94</span>
+<span class="font-label-sm text-label-sm text-secondary block font-mono">+8.4k share</span>
+</div>
+</div>
+<!-- Headline 2 -->
+<div class="bg-surface-container-low hover:bg-surface-container-high p-space-xs rounded-lg flex items-center justify-between gap-space-xs transition-colors border border-transparent hover:border-error/30">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="w-8 h-8 rounded bg-error/10 border border-error/20 flex items-center justify-center text-error text-xs font-bold font-mono flex-shrink-0">
+              DTK
+            </div>
+<div class="min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-error font-bold">DETIK NEWS</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">· 42 mnt lalu</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface block truncate font-medium">
+                "Penyidik Dalami Mekanisme Dead Man's Switch Terkait Dugaan Pembocoran Dokumen Rahasia Pengadaan"
+              </span>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-label-md text-label-md text-error font-bold font-mono">Viral: 88</span>
+<span class="font-label-sm text-label-sm text-tertiary block font-mono">+14.2k share</span>
+</div>
+</div>
+<!-- Headline 3 -->
+<div class="bg-surface-container-low hover:bg-surface-container-high p-space-xs rounded-lg flex items-center justify-between gap-space-xs transition-colors border border-transparent hover:border-secondary/30">
+<div class="flex items-center gap-space-xs min-w-0">
+<div class="w-8 h-8 rounded bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary text-xs font-bold font-mono flex-shrink-0">
+              TRT
+            </div>
+<div class="min-w-0">
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold">TIRTO.ID</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-mono">· 1 jam lalu</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface block truncate font-medium">
+                "Pakar Kriptografi Forensik: Arsip Ibam Dikunci Algoritma age X25519, Mustahil Didekripsi Tanpa Private Key"
+              </span>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-label-md text-label-md text-secondary font-bold font-mono">Viral: 82</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block font-mono">+5.9k share</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="px-space-md pt-space-md mb-space-md">
+<div class="bg-surface-container rounded-xl p-space-md shadow-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-headline-md text-headline-md text-on-surface">Alat Investigasi Lapangan</span>
+<span class="font-label-sm text-label-sm text-primary uppercase flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+  OPSEC LEVEL 4
+</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="bg-surface-container-high hover:bg-surface-container-highest active:scale-95 text-primary p-space-sm rounded-lg flex flex-col items-start gap-1 transition-all text-left border border-transparent hover:border-primary/40 focus:outline-none" id="btn-torrent-meta">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="font-label-md text-label-md font-bold">Metadata .torrent</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ekstrak info-hash &amp; tracker list</span>
+</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest active:scale-95 text-secondary p-space-sm rounded-lg flex flex-col items-start gap-1 transition-all text-left border border-transparent hover:border-secondary/40 focus:outline-none" id="btn-verify-sha">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span class="font-label-md text-label-md font-bold">Verifikasi Hash</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pencocokan SHA-256 payload</span>
+</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest active:scale-95 text-tertiary p-space-sm rounded-lg flex flex-col items-start gap-1 transition-all text-left border border-transparent hover:border-tertiary/40 focus:outline-none" id="btn-sim-decrypt">
+<span class="material-symbols-outlined text-[20px]">key</span>
+<span class="font-label-md text-label-md font-bold">Simulasi Kunci age</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Uji coba penerima X25519</span>
+</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest active:scale-95 text-on-surface p-space-sm rounded-lg flex flex-col items-start gap-1 transition-all text-left border border-transparent hover:border-on-surface/40 focus:outline-none" id="btn-export-gephi">
+<span class="material-symbols-outlined text-[20px]">share</span>
+<span class="font-label-md text-label-md font-bold">Ekspor SNA Gephi</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Format JSON / GraphML node map</span>
+</button>
+</div>
+<!-- Quick Action Feedback Toast (Hidden by default) -->
+<div class="hidden mt-space-sm p-space-xs rounded bg-surface-container-highest text-primary font-label-sm text-label-sm flex items-center gap-2 border border-primary/30 shadow-lg animate-bounce" id="action-toast">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span id="toast-message">Memproses request telemetri...</span>
+</div>
+</div>
+</div>
+<!-- Interactive Local Logic Script -->
+<script>
+    (function() {
+      // 1. Live Countdown Heartbeat Timer Simulation (Ticks every second)
+      let totalSeconds = (47 * 3600) + (58 * 60) + 27;
+      let toleranceSeconds = (24 * 3600) + (1 * 60) + 28;
+      const timerElement = document.getElementById('dms-timer');
+      const toleranceElement = document.getElementById('dms-remaining');
+
+      const pad = (num) => String(num).padStart(2, '0');
+
+      function updateCountdown() {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          const hours = Math.floor(totalSeconds / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+          
+          if (timerElement) {
+            timerElement.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+          }
+        }
+        if (toleranceSeconds > 0) {
+          toleranceSeconds--;
+          const th = Math.floor(toleranceSeconds / 3600);
+          const tm = Math.floor((toleranceSeconds % 3600) / 60);
+          const ts = toleranceSeconds % 60;
+          if (toleranceElement) {
+            toleranceElement.textContent = `Batas Toleransi: ${pad(th)}:${pad(tm)}:${pad(ts)} tersisa`;
+          }
+        }
+      }
+      setInterval(updateCountdown, 1000);
+
+      // Dynamic Swarm Metrics Counter Simulation
+      let seeders = 312;
+      let leechers = 1420;
+      let repSpeed = 142;
+      const swarmCounts = document.getElementById('swarm-counts');
+      const replicationSpeed = document.getElementById('replication-speed');
+      const swarmVelocity = document.getElementById('swarm-velocity');
+
+      setInterval(() => {
+        const deltaSeeders = Math.floor(Math.random() * 5) - 2;
+        const deltaLeechers = Math.floor(Math.random() * 9) - 4;
+        seeders = Math.max(290, seeders + deltaSeeders);
+        leechers = Math.max(1350, leechers + deltaLeechers);
+        repSpeed = Math.max(130, Math.min(160, repSpeed + (Math.floor(Math.random() * 7) - 3)));
+
+        if (swarmCounts) {
+          swarmCounts.textContent = `${seeders} Seeders / ${leechers.toLocaleString()} Leechers`;
+        }
+        if (replicationSpeed) {
+          replicationSpeed.textContent = `Kecepatan Replikasi: ${repSpeed} MB/s`;
+        }
+        if (swarmVelocity && Math.random() > 0.6) {
+          const v = 120 + Math.floor(Math.random() * 18);
+          swarmVelocity.textContent = `+${v} nodus/jam`;
+        }
+      }, 3500);
+
+      // Graph Filter Interactions
+      const filterChips = document.querySelectorAll('.filter-chip');
+      const clusterLinks = document.querySelectorAll('.cluster-link');
+      const clusterGroups = document.querySelectorAll('.cluster-group');
+
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          filterChips.forEach(c => {
+            c.classList.remove('bg-primary', 'text-on-primary', 'font-bold', 'ring-1', 'ring-primary');
+            c.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+          });
+          chip.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+          chip.classList.add('bg-primary', 'text-on-primary', 'font-bold', 'ring-1', 'ring-primary');
+
+          const filter = chip.getAttribute('data-filter');
+          if (filter === 'all') {
+            clusterLinks.forEach(l => l.style.opacity = '');
+            clusterGroups.forEach(g => g.style.opacity = '1');
+          } else {
+            clusterLinks.forEach(l => {
+              if (l.classList.contains(`link-${filter}`)) {
+                l.style.opacity = '1';
+              } else {
+                l.style.opacity = '0.1';
+              }
+            });
+            clusterGroups.forEach(g => {
+              if (g.classList.contains(`cluster-${filter}`)) {
+                g.style.opacity = '1';
+              } else {
+                g.style.opacity = '0.2';
+              }
+            });
+          }
+        });
+      });
+
+      // Interactive Action Toolbar Toast Handler
+      const toast = document.getElementById('action-toast');
+      const toastMsg = document.getElementById('toast-message');
+      let toastTimer = null;
+
+      function showFeedback(text) {
+        if (!toast || !toastMsg) return;
+        toastMsg.textContent = text;
+        toast.classList.remove('hidden');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.add('hidden');
+        }, 3400);
+      }
+
+      document.getElementById('btn-torrent-meta')?.addEventListener('click', () => {
+        showFeedback("Info-hash 'b62a84...' terekstraksi. 12 tracker DHT ditambahkan ke pemantauan.");
+      });
+
+      document.getElementById('btn-verify-sha')?.addEventListener('click', () => {
+        showFeedback("SHA-256 MATCH: Integritas payload 'kemendikbud_chromebook_audit' 100% valid.");
+      });
+
+      document.getElementById('btn-sim-decrypt')?.addEventListener('click', () => {
+        showFeedback("Menunggu rilis privat key via Dead Man's Switch... Header age identik dengan format X25519.");
+      });
+
+      document.getElementById('btn-export-gephi')?.addEventListener('click', () => {
+        showFeedback("Dataset SNA (342 Nodus, 1,280 Tautan) diekspor ke format JSON forensic.");
+      });
+
+      // Bottom Navigation Active State Micro-interaction
+      const navItems = document.querySelectorAll('nav a');
+      navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          navItems.forEach(n => {
+            n.classList.remove('text-primary');
+            n.classList.add('text-on-surface-variant');
+            n.removeAttribute('aria-current');
+          });
+          item.classList.add('text-primary');
+          item.classList.remove('text-on-surface-variant');
+          item.setAttribute('aria-current', 'page');
+        });
+      });
+    })();
+  </script>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-1px_12px_rgba(0,0,0,0.6)]" data-active-classes="text-primary"><div class="flex items-center justify-around h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] flex-1 py-1 transition-all group text-primary active:scale-95" data-path="sna-graph" href="#"><span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">hub</span><span class="font-label-sm text-label-sm uppercase tracking-wide mt-0.5">SNA Graph</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] flex-1 py-1 text-on-surface-variant hover:text-primary transition-all group active:scale-95" data-path="bittorrent-tracker" href="#"><span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">stream</span><span class="font-label-sm text-label-sm uppercase tracking-wide mt-0.5">BT Swarm</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] flex-1 py-1 text-on-surface-variant hover:text-primary transition-all group active:scale-95" data-path="social-signals" href="#"><span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">radar</span><span class="font-label-sm text-label-sm uppercase tracking-wide mt-0.5">Signals</span></a><a class="flex flex-col items-center justify-center min-w-[44px] min-h-[44px] flex-1 py-1 text-on-surface-variant hover:text-primary transition-all group active:scale-95" data-path="case-file" href="#"><span class="material-symbols-outlined text-[22px] group-hover:scale-110 transition-transform">folder_open</span><span class="font-label-sm text-label-sm uppercase tracking-wide mt-0.5">Case File</span></a></div></nav></body></html>
